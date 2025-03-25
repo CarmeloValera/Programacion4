@@ -2,11 +2,29 @@
 #include "menu.h"
 
 void iniciarSesion() {
-    printf("Iniciando sesion...\n");
+    char usuario[50];
+    char contrasena[50];
+
+    printf("\n=== Iniciar Sesion ===\n");
+    printf("Ingrese su usuario: ");
+    scanf("%s", usuario);
+    printf("Ingrese su contraseña: ");
+    scanf("%s", contrasena);
+
+    printf("Intentando iniciar sesion con usuario: %s y contrasena: %s\n", usuario, contrasena);
 }
 
 void registrar() {
-    printf("Registrando usuario...\n");
+    char usuario[50];
+    char contrasena[50];
+
+    printf("\n=== Registrar Usuario ===\n");
+    printf("Ingrese su nuevo usuario: ");
+    scanf("%s", usuario);
+    printf("Ingrese su nueva contraseña: ");
+    scanf("%s", contrasena);
+
+    printf("Usuario registrado con éxito: %s\n", usuario);
 }
 
 void jugar() {
