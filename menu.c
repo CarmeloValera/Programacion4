@@ -46,7 +46,7 @@ void opcionesUsuario() {
     do {
         printf("\n=== Opciones del Usuario ===\n");
         printf("1. Cambiar nombre de usuario\n");
-        printf("2. Cambiar contraseña\n");
+        printf("2. Cambiar contrasena\n");
         printf("3. Volver\n");
         printf("Seleccione una opción: ");
         scanf("%d", &opcion);
@@ -56,10 +56,10 @@ void opcionesUsuario() {
                 printf("Cambiando nombre de usuario...\n");
                 break;
             case 2:
-                printf("Cambiando contraseña...\n");
+                printf("Cambiando contrasena...\n");
                 break;
             case 3:
-                printf("Mostrando estadísticas...\n");
+                printf("Voloviendo...\n");
                 break;
             default:
                 printf("Opción inválida. Intente de nuevo.\n");

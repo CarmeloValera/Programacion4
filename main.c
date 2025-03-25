@@ -6,7 +6,7 @@ int main() {
     int opcion;
 
     do {
-        printf("\n=== Menú Principal ===\n");
+        printf("\n=== Menu Principal ===\n");
         printf("1. Iniciar sesión\n");
         printf("2. Registrar\n");
         printf("3. Jugar\n");
