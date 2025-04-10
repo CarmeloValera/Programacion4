@@ -7,12 +7,12 @@ int main() {
 
     do {
         printf("\n=== Menu Principal ===\n");
-        printf("1. Iniciar sesión\n");
+        printf("1. Iniciar sesion\n");
         printf("2. Registrar\n");
         printf("3. Jugar\n");
         printf("4. Opciones del usuario\n");
         printf("5. Salir\n");
-        printf("Seleccione una opción: ");
+        printf("Seleccione una opcion: ");
         scanf("%d", &opcion);
 
         switch (opcion) {
@@ -32,7 +32,7 @@ int main() {
                 printf("Saliendo del programa...\n");
                 break;
             default:
-                printf("Opción inválida. Intente de nuevo.\n");
+                printf("Opción invalida. Intente de nuevo.\n");
                 break;
         }
     } while (opcion != 5);

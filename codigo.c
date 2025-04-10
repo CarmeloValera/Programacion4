@@ -19,9 +19,9 @@ void jugarCodigo() {
     srand(time(NULL));
     generarCodigo(codigoSecreto);
 
-    printf("\n=== Juego de Código Numérico ===\n");
-    printf("Adivina el código de 4 dígitos. Tienes %d intentos.\n", intentosMax);
-    printf("Pistas: X = número correcto y en su lugar, O = número correcto pero en lugar incorrecto\n");
+    printf("\n=== Juego de Codigo Numerico ===\n");
+    printf("Adivina el codigo de 4 digitos. Tienes %d intentos.\n", intentosMax);
+    printf("Pistas: X = número correcto y en su lugar, O = numero correcto pero en lugar incorrecto\n");
 
     for (int intentoNum = 1; intentoNum <= intentosMax; intentoNum++) {
         printf("\nIntento %d: ", intentoNum);
@@ -63,13 +63,13 @@ void jugarCodigo() {
         }
 
         if (aciertos == 4) {
-            printf("\n🎉 ¡Felicidades! Has adivinado el código correctamente.\n");
+            printf("\n🎉 ¡Felicidades! Has adivinado el codigo correctamente.\n");
             return;
         }
     }
 
     printf("\n😢 Lo siento, has agotado tus intentos.\n");
-    printf("El código secreto era: ");
+    printf("El codigo secreto era: ");
     for (int i = 0; i < 4; i++) {
         printf("%d", codigoSecreto[i]);
     }

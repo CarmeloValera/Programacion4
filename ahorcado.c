@@ -58,7 +58,7 @@ void jugarAhorcado() {
         if (letraCorrecta) {
             printf("¡Correcto! La letra '%c' está en la palabra.\n", letra);
         } else {
-            printf("Incorrecto. La letra '%c' no está.\n", letra);
+            printf("Incorrecto. La letra '%c' no esta.\n", letra);
             intentos--;
         }
     }

@@ -10,7 +10,7 @@ void iniciarSesion() {
     printf("\n=== Iniciar Sesion ===\n");
     printf("Ingrese su usuario: ");
     scanf("%s", usuario);
-    printf("Ingrese su contraseña: ");
+    printf("Ingrese su contrasena: ");
     scanf("%s", contrasena);
 
     printf("Intentando iniciar sesion con usuario: %s y contrasena: %s\n", usuario, contrasena);
@@ -23,10 +23,10 @@ void registrar() {
     printf("\n=== Registrar Usuario ===\n");
     printf("Ingrese su nuevo usuario: ");
     scanf("%s", usuario);
-    printf("Ingrese su nueva contraseña: ");
+    printf("Ingrese su nueva contrasena: ");
     scanf("%s", contrasena);
 
-    printf("Usuario registrado con éxito: %s\n", usuario);
+    printf("Usuario registrado con exito: %s\n", usuario);
 }
 
 void jugar() {
@@ -53,10 +53,10 @@ void jugar() {
                 printf("historial del usuario...");
                 break;
             case 4:
-                printf("Saliendo al menú principal...\n");
+                printf("Saliendo al menu principal...\n");
                 break;
             default:
-                printf("Opción inválida. Intente de nuevo.\n");
+                printf("Opcion invalida. Intente de nuevo.\n");
                 break;
         }
     } while (opcion != 4);
@@ -70,7 +70,7 @@ void opcionesUsuario() {
         printf("1. Cambiar nombre de usuario\n");
         printf("2. Cambiar contrasena\n");
         printf("3. Volver\n");
-        printf("Seleccione una opción: ");
+        printf("Seleccione una opcion: ");
         scanf("%d", &opcion);
 
         switch (opcion) {
@@ -84,7 +84,7 @@ void opcionesUsuario() {
                 printf("Voloviendo...\n");
                 break;
             default:
-                printf("Opción inválida. Intente de nuevo.\n");
+                printf("Opción invalida. Intente de nuevo.\n");
                 break;
         }
     } while (opcion != 3);
