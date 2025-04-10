@@ -7,8 +7,8 @@
 
 void jugarAhorcado() {
     const char* palabras[] = {
-        "programacion", "computadora", "teclado", "monitor",
-        "ciencia", "ahorcado", "algoritmo", "codigo", "terminal"
+        "programacion", "ordenador", "cocodrilo", "monitor",
+        "kiwi", "ahorcado", "edificio", "codigo", "azul"
     };
     int totalPalabras = sizeof(palabras) / sizeof(palabras[0]);
 
