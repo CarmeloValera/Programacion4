@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "menu.h"
+#include "ahorcado.h"
 
 void iniciarSesion() {
     char usuario[50];
@@ -41,6 +42,7 @@ void jugar() {
         switch (opcion) {
             case 1:
                 printf("ahorcado...\n");
+                jugarAhorcado();
                 break;
             case 2:
                 printf("secuencia numerica...\n");
