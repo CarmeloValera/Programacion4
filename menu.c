@@ -37,7 +37,7 @@ void jugar() {
         printf("2. Jugar a la secuencia numerica\n");
         printf("3. Historial del usuario\n");
         printf("4. Salir al menu principal\n");
-        printf("Seleccione una opción: ");
+        printf("Seleccione una opcion: ");
         scanf("%d", &opcion);
 
         switch (opcion) {

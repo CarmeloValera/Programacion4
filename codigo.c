@@ -14,14 +14,14 @@ void jugarCodigo() {
     int codigoSecreto[4];
     int intento[4];
     char entrada[10];
-    int intentosMax = 5;
+    int intentosMax = 8;
 
     srand(time(NULL));
     generarCodigo(codigoSecreto);
 
     printf("\n=== Juego de Codigo Numerico ===\n");
     printf("Adivina el codigo de 4 digitos. Tienes %d intentos.\n", intentosMax);
-    printf("Pistas: X = número correcto y en su lugar, O = numero correcto pero en lugar incorrecto\n");
+    printf("Pistas: X = numero correcto y en su lugar, O = numero correcto pero en lugar incorrecto\n");
 
     for (int intentoNum = 1; intentoNum <= intentosMax; intentoNum++) {
         printf("\nIntento %d: ", intentoNum);
