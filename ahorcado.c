@@ -4,16 +4,11 @@
 #include <time.h>
 #include <ctype.h>
 #include "ahorcado.h"
+#include "util.h"
 
 void jugarAhorcado() {
-    const char* palabras[] = {
-        "programacion", "ordenador", "cocodrilo", "monitor",
-        "kiwi", "ahorcado", "edificio", "codigo", "azul"
-    };
-    int totalPalabras = sizeof(palabras) / sizeof(palabras[0]);
-
-    srand(time(NULL));
-    const char* palabraSecreta = palabras[rand() % totalPalabras];
+    
+    const char* palabraSecreta = leerProxPalabra("palabras.txt");
 
     char letras[100] = "";
     int intentos = 6;
