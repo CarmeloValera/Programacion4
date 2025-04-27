@@ -45,7 +45,7 @@ void jugarCodigo(Usuario user) {
         int usadosCodigo[4] = {0};
         int usadosIntento[4] = {0};
 
-        char resultado[5] = "";  // Aquí guardamos la secuencia de pistas
+        char resultado[5] = "";  
 
         // Primero, buscar aciertos exactos (X)
         for (int i = 0; i < 4; i++) {
@@ -55,13 +55,13 @@ void jugarCodigo(Usuario user) {
                 usadosIntento[i] = 1;
                 aciertos++;
             } else {
-                resultado[i] = '-'; // De momento lo marcamos como -
+                resultado[i] = '-'; 
             }
         }
 
         // Después, buscar aciertos en posición incorrecta (O)
         for (int i = 0; i < 4; i++) {
-            if (resultado[i] == '-') { // Solo intentamos corregir los que son -
+            if (resultado[i] == '-') { 
                 for (int j = 0; j < 4; j++) {
                     if (!usadosCodigo[j] && intento[i] == codigoSecreto[j]) {
                         resultado[i] = 'O';
@@ -72,7 +72,7 @@ void jugarCodigo(Usuario user) {
             }
         }
 
-        // Imprimir el resultado
+        
         for (int i = 0; i < 4; i++) {
             printf("%c ", resultado[i]);
         }

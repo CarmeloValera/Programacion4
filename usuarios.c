@@ -1,8 +1,8 @@
 #include <stdio.h>
-#include <string.h>  // Para usar strcpy
+#include <string.h> 
 #include "usuarios.h"
 
-// Función que pide el nombre de usuario y lo devuelve como un puntero a char
+
 char* pedir_usuario(void) {
     static char nombre[MAX_USUARIO];  // Usamos static para que la cadena persista fuera de la función
     printf("Ingrese su nombre de usuario: ");
@@ -10,7 +10,7 @@ char* pedir_usuario(void) {
     return nombre;
 }
 
-// Función que pide la contraseña y lo devuelve como un puntero a char
+
 char* pedir_contrasena(void) {
     static char contrasena[MAX_CONTRASENA];  // Usamos static para que la cadena persista fuera de la función
     printf("Ingrese su contraseña: ");

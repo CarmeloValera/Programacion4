@@ -3,7 +3,7 @@
 #include "ahorcado.h"
 #include "codigo.h"
 #include "util.h"
-#include "usuarios.h"    // <-- nuevo
+#include "usuarios.h"    
 #include "bbdd/bbddmain.h" 
 #include <string.h>
 
@@ -11,7 +11,7 @@ extern BBDD baseDatos;
 Usuario usuarioLogueado = {"Invitado", ""};
 
 Usuario iniciarSesion(BBDD *baseDatos) {
-    Usuario user = { "", "" }; // Usuario vacío por defecto
+    Usuario user = { "", "" }; 
 
     // Pedimos el nombre y la contraseña
     strcpy(user.nombre, pedir_usuario());  

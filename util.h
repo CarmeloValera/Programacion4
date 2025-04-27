@@ -1,5 +1,6 @@
 #ifndef UTILES_H_
 #define UTILES_H_
+#include "usuarios.h" 
 
 char* leerProxPalabra(const char* fichero);
 void guardarHistorialAhorcado(const char *usuario,const char* palabraSecreta, int aciertos, int intentosRestantes);

@@ -3,12 +3,12 @@
 
 #include "sqlite3.h"
 
-// Estructura para manejar la base de datos
+
 typedef struct {
     sqlite3 *db;
 } BBDD;
 
-// Funciones públicas
+
 int abrir_base(BBDD *base, const char *nombre_archivo);
 void cerrar_base(BBDD *base);
 int registrar_usuario(BBDD *base, const char *usuario, const char *contrasena);
