@@ -6,3 +6,18 @@ Intentos restantes: 5
 Resultado: Victoria
 ---------------------------
 
+=== Partida de Ahorcado ===
+Fecha: 27/04/2025 09:59
+Palabra secreta: perro
+Aciertos: 2
+Intentos restantes: 0
+Resultado: Derrota
+---------------------------
+
+=== Partida de Codigo Numerico ===
+Fecha: 27/04/2025 10:00
+Codigo secreto: 7343
+Intentos usados: 8
+Resultado: Derrota
+---------------------------
+

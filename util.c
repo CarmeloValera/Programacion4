@@ -99,14 +99,70 @@ void mostrarHistorial() {
         return;
     }
 
-    char linea[MAX_LINEA];
-    printf("\n=== Historial de Partidas ===\n");
+    char *lineas[MAX_LINEA];
+    int numLineas = 0;
+    char buffer[MAX_LINEA];
 
-    while (fgets(linea, sizeof(linea), historial)) {
-        printf("%s", linea);
+    while (fgets(buffer, sizeof(buffer), historial) != NULL) {
+        lineas[numLineas] = strdup(buffer); 
+        numLineas++;
+        if (numLineas >= MAX_LINEA) {
+            break;
+        }
+    }
+    fclose(historial);
+
+    if (numLineas == 0) {
+        printf("\nEl historial está vacío.\n");
+        return;
     }
 
-    printf("\n=== Fin del Historial ===\n");
+    int partidaInicio = -1;
+    for (int i = numLineas - 1; i >= 0; i--) {
+        if (strstr(lineas[i], "=== Partida") != NULL) {
+            partidaInicio = i;
+            int opcion;
 
-    fclose(historial);
+            do {
+                printf("\n=== Mostrando Partida ===\n\n");
+                for (int j = partidaInicio; j < numLineas; j++) {
+                    printf("%s", lineas[j]);
+                    if ((j + 1 < numLineas) && strstr(lineas[j + 1], "=== Partida") != NULL) {
+                        break; 
+                    }
+                }
+
+                printf("\n1. Ver siguiente partida\n");
+                printf("2. Salir\n");
+                printf("Seleccione una opción: ");
+                scanf("%d", &opcion);
+
+                if (opcion == 1) {
+                    int nuevaInicio = -1;
+                    for (int k = partidaInicio - 1; k >= 0; k--) {
+                        if (strstr(lineas[k], "=== Partida") != NULL) {
+                            nuevaInicio = k;
+                            break;
+                        }
+                    }
+
+                    if (nuevaInicio != -1) {
+                        partidaInicio = nuevaInicio;
+                    } else {
+                        printf("\nNo hay más partidas anteriores.\n");
+                        opcion = 2; 
+                    }
+                } else if (opcion != 2) {
+                    printf("\nOpción inválida.\n");
+                }
+
+            } while (opcion != 2);
+
+            break;
+        }
+    }
+
+    for (int i = 0; i < numLineas; i++) {
+        free(lineas[i]);
+    }
 }
