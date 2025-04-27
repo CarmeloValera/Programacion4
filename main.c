@@ -1,8 +1,13 @@
 #include <stdio.h>
 #include "menu.h"
-
+#include "bbdd/sqlite3.h"
+#include "bbdd/bbddmain.h"
+BBDD baseDatos;
 int main() {
     int opcion;
+    if (abrir_base(&baseDatos, "BaseDeDatos.db") != SQLITE_OK) {
+        return 1;
+    }
 
     do {
         printf("\n=== Menu Principal ===\n");
@@ -35,6 +40,6 @@ int main() {
                 break;
         }
     } while (opcion != 5);
-
+    cerrar_base(&baseDatos);
     return 0;
 }

@@ -3,31 +3,43 @@
 #include "ahorcado.h"
 #include "codigo.h"
 #include "util.h"
+#include "usuarios.h"    // <-- nuevo
+#include "bbdd/bbddmain.h" 
+#include <string.h>
 
+extern BBDD baseDatos; 
 void iniciarSesion() {
-    char usuario[50];
-    char contrasena[50];
+    Usuario user;
 
-    printf("\n=== Iniciar Sesion ===\n");
-    printf("Ingrese su usuario: ");
-    scanf("%s", usuario);
-    printf("Ingrese su contrasena: ");
-    scanf("%s", contrasena);
+    strcpy(user.nombre, pedir_usuario());  
+    strcpy(user.contrasena, pedir_contrasena()); 
 
-    printf("Intentando iniciar sesion con usuario: %s y contrasena: %s\n", usuario, contrasena);
+    if (iniciar_sesion(&baseDatos, user.nombre, user.contrasena)) {
+        printf("Inicio de sesión exitoso.\n");
+        // Aquí podrías continuar con el juego o el menú principal
+    } else {
+        printf("Nombre de usuario o contraseña incorrectos.\n");
+    }
 }
 
 void registrar() {
-    char usuario[50];
-    char contrasena[50];
-
+    Usuario user;
     printf("\n=== Registrar Usuario ===\n");
-    printf("Ingrese su nuevo usuario: ");
-    scanf("%s", usuario);
-    printf("Ingrese su nueva contrasena: ");
-    scanf("%s", contrasena);
 
-    printf("Usuario registrado con exito: %s\n", usuario);
+    strcpy(user.nombre, pedir_usuario());   // Primero solo pedimos el nombre
+
+    if (existe_usuario(&baseDatos, user.nombre)) {   // <-- FUNCION NUEVA que comprobaremos en bbddmain.c
+        printf("El nombre de usuario ya existe. Intenta con otro.\n");
+        return;
+    }
+
+    strcpy(user.contrasena, pedir_contrasena());  // Si no existe, ahora pedimos la contraseña
+
+    if (registrar_usuario(&baseDatos, user.nombre, user.contrasena) == SQLITE_OK) {
+        printf("Usuario registrado exitosamente.\n");
+    } else {
+        printf("Error al registrar usuario.\n");
+    }
 }
 
 void jugar() {
