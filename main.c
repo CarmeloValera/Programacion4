@@ -28,7 +28,7 @@ int main() {
                 registrar();
                 break;
             case 3:
-                jugar();
+                jugar(user);
                 break;
             case 4:
                 opcionesUsuario(user);

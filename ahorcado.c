@@ -5,8 +5,9 @@
 #include <ctype.h>
 #include "ahorcado.h"
 #include "util.h"
+#include "usuarios.h"
 
-void jugarAhorcado() {
+void jugarAhorcado(Usuario user) {
     
     const char* palabraSecreta = leerProxPalabra("palabras.txt");
 
@@ -63,5 +64,5 @@ void jugarAhorcado() {
     } else {
         printf("\nHas perdido. La palabra era: %s\n", palabraSecreta);
     }
-    guardarHistorialAhorcado(palabraSecreta, aciertos, intentos);
+    guardarHistorialAhorcado(user.nombre,palabraSecreta, aciertos, intentos);
 }

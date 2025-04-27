@@ -6,8 +6,7 @@
 
 Usuario iniciarSesion(BBDD *baseDatos);
 void registrar();
-void jugar();
+void jugar(Usuario);
 void opcionesUsuario(Usuario);
-Usuario obetenerUsuario();
 
 #endif

@@ -1,6 +1,6 @@
 #ifndef CODIGO_H
 #define CODIGO_H
-
-void jugarCodigo();
+#include "usuarios.h"
+void jugarCodigo(Usuario user);
 
 #endif

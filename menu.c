@@ -48,10 +48,9 @@ void registrar() {
     }
 
     // Intentamos cerrar la base de datos correctamente
-    cerrar_base(&baseDatos);
 }
 
-void jugar() {
+void jugar(Usuario user) {
     int opcion;
     do {
         printf("\n=== Menu Jugar ===\n");
@@ -65,15 +64,15 @@ void jugar() {
         switch (opcion) {
             case 1:
                 printf("ahorcado...\n");
-                jugarAhorcado();
+                jugarAhorcado(user);
                 break;
             case 2:
                 printf("secuencia numerica...\n");
-                jugarCodigo();
+                jugarCodigo(user);
                 break;
             case 3:
                 printf("historial del usuario...");
-                mostrarHistorial();
+                mostrarHistorial(user);
                 break;
             case 4:
                 printf("Saliendo al menu principal...\n");
@@ -163,9 +162,5 @@ void opcionesUsuario(Usuario user) {
     } while (opcion != 3);
 
     // Cerramos la base de datos después de salir del bucle
-    cerrar_base(&baseDatos);
 }
 
-Usuario obtenerUsuario() {
-    return usuarioLogueado;
-}

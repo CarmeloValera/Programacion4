@@ -1,23 +1,52 @@
 === Partida de Ahorcado ===
-Fecha: 27/04/2025 09:43
+Usuario: pablo
+Fecha: 27/04/2025 19:31
 Palabra secreta: bicicleta
 Aciertos: 9
-Intentos restantes: 5
+Intentos restantes: 2
 Resultado: Victoria
 ---------------------------
 
 === Partida de Ahorcado ===
-Fecha: 27/04/2025 09:59
+Usuario: pablo
+Fecha: 27/04/2025 19:31
+Palabra secreta: avioneta
+Aciertos: 8
+Intentos restantes: 6
+Resultado: Victoria
+---------------------------
+
+=== Partida de Ahorcado ===
+Usuario: pablo
+Fecha: 27/04/2025 19:32
 Palabra secreta: perro
-Aciertos: 2
+Aciertos: 3
 Intentos restantes: 0
 Resultado: Derrota
 ---------------------------
 
 === Partida de Codigo Numerico ===
-Fecha: 27/04/2025 10:00
-Codigo secreto: 7343
+Usuario: jaime
+Fecha: 27/04/2025 19:42
+Codigo secreto: 4520
 Intentos usados: 8
 Resultado: Derrota
+---------------------------
+
+=== Partida de Codigo Numerico ===
+Usuario: juan
+Fecha: 27/04/2025 19:46
+Codigo secreto: 7693
+Intentos usados: 5
+Resultado: Victoria
+---------------------------
+
+
+=== Partida de Codigo Numerico ===
+Usuario: juan
+Fecha: 27/04/2025 19:52
+Codigo secreto: 6894
+Intentos usados: 3
+Resultado: Victoria
 ---------------------------
 
