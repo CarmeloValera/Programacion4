@@ -2,6 +2,7 @@
 #include "menu.h"
 #include "ahorcado.h"
 #include "codigo.h"
+#include "util.h"
 
 void iniciarSesion() {
     char usuario[50];
@@ -51,6 +52,7 @@ void jugar() {
                 break;
             case 3:
                 printf("historial del usuario...");
+                mostrarHistorial();
                 break;
             case 4:
                 printf("Saliendo al menu principal...\n");

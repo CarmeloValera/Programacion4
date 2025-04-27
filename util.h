@@ -4,5 +4,6 @@
 char* leerProxPalabra(const char* fichero);
 void guardarHistorialAhorcado(const char* palabraSecreta, int aciertos, int intentosRestantes);
 void guardarHistorialCodigo(int codigoSecreto[4], int exito, int intentosUsados);
+void mostrarHistorial();
 
 #endif

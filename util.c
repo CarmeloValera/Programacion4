@@ -92,3 +92,21 @@ void guardarHistorialCodigo(int codigoSecreto[4], int exito, int intentosUsados)
 
     fclose(historial);
 }
+void mostrarHistorial() {
+    FILE* historial = fopen("historial.txt", "r");
+    if (historial == NULL) {
+        printf("\nNo se encontró historial de partidas.\n");
+        return;
+    }
+
+    char linea[MAX_LINEA];
+    printf("\n=== Historial de Partidas ===\n");
+
+    while (fgets(linea, sizeof(linea), historial)) {
+        printf("%s", linea);
+    }
+
+    printf("\n=== Fin del Historial ===\n");
+
+    fclose(historial);
+}
