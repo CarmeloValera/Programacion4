@@ -8,17 +8,23 @@
 #include <string.h>
 
 extern BBDD baseDatos; 
-void iniciarSesion() {
-    Usuario user;
+Usuario usuarioLogueado = {"Invitado", ""};
 
+Usuario iniciarSesion(BBDD *baseDatos) {
+    Usuario user = { "", "" }; // Usuario vacío por defecto
+
+    // Pedimos el nombre y la contraseña
     strcpy(user.nombre, pedir_usuario());  
     strcpy(user.contrasena, pedir_contrasena()); 
 
-    if (iniciar_sesion(&baseDatos, user.nombre, user.contrasena)) {
+    // Verificamos si el inicio de sesión es exitoso
+    if (iniciar_sesion(baseDatos, user.nombre, user.contrasena)) {
         printf("Inicio de sesión exitoso.\n");
-        // Aquí podrías continuar con el juego o el menú principal
+        usuarioLogueado = user;  // Cambia el usuario logueado
+        return user;
     } else {
         printf("Nombre de usuario o contraseña incorrectos.\n");
+        return usuarioLogueado;  // Retorna el usuario invitado si la autenticación falla
     }
 }
 
@@ -40,6 +46,9 @@ void registrar() {
     } else {
         printf("Error al registrar usuario.\n");
     }
+
+    // Intentamos cerrar la base de datos correctamente
+    cerrar_base(&baseDatos);
 }
 
 void jugar() {
@@ -76,7 +85,13 @@ void jugar() {
     } while (opcion != 4);
 }
 
-void opcionesUsuario() {
+void opcionesUsuario(Usuario user) {
+    if (strcmp(user.nombre, "Invitado") == 0) {
+        // Si el usuario es "Invitado", significa que no ha iniciado sesión
+        printf("El usuario debe iniciar sesión antes de acceder a estas opciones.\n");
+        return;  // Sale de la función sin ofrecer las opciones
+    }
+
     int opcion;
     do {
         printf("\n=== Opciones del Usuario ===\n");
@@ -88,17 +103,69 @@ void opcionesUsuario() {
 
         switch (opcion) {
             case 1:
-                printf("Cambiando nombre de usuario...\n");
+                {
+                    char nuevo_nombre[50];  // Declarar dentro de un bloque para evitar el error
+                    printf("Ingrese el nuevo nombre de usuario: ");
+                    scanf("%s", nuevo_nombre);
+                    
+                    int intentos = 3;
+                    int exito = 0;
+
+                    while (intentos > 0 && !exito) {
+                        if (cambiar_nombre_usuario(&baseDatos, user.nombre, nuevo_nombre) == 0) {
+                            printf("Nombre de usuario actualizado con éxito.\n");
+                            exito = 1;  // Si la operación es exitosa, salimos del ciclo
+                        } else {
+                            printf("La base de datos está bloqueada, reintentando...\n");
+                            intentos--;
+                            sqlite3_sleep(500);  // Esperamos un poco antes de intentar de nuevo
+                        }
+                    }
+                    if (intentos == 0) {
+                        printf("Error: No se pudo actualizar el nombre de usuario. La base de datos sigue bloqueada.\n");
+                    }
+                }
                 break;
+
             case 2:
-                printf("Cambiando contrasena...\n");
+                {
+                    char nueva_contrasena[MAX_USUARIO];  // Declarar dentro de un bloque para evitar el error
+                    printf("Ingrese la nueva contraseña: ");
+                    scanf("%s", nueva_contrasena);
+                    
+                    int intentos = 3;
+                    int exito = 0;
+
+                    while (intentos > 0 && !exito) {
+                        if (cambiar_contrasena(&baseDatos, user.nombre, nueva_contrasena) == 0) {
+                            printf("Contraseña del usuario actualizada con éxito.\n");
+                            exito = 1;  // Si la operación es exitosa, salimos del ciclo
+                        } else {
+                            printf("La base de datos está bloqueada, reintentando...\n");
+                            intentos--;
+                            sqlite3_sleep(500);  // Esperamos un poco antes de intentar de nuevo
+                        }
+                    }
+                    if (intentos == 0) {
+                        printf("Error: No se pudo actualizar la contraseña. La base de datos sigue bloqueada.\n");
+                    }
+                }
                 break;
+
             case 3:
-                printf("Voloviendo...\n");
+                printf("Volviendo...\n");
                 break;
+
             default:
                 printf("Opción invalida. Intente de nuevo.\n");
                 break;
         }
     } while (opcion != 3);
+
+    // Cerramos la base de datos después de salir del bucle
+    cerrar_base(&baseDatos);
+}
+
+Usuario obtenerUsuario() {
+    return usuarioLogueado;
 }

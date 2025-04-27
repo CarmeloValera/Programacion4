@@ -2,6 +2,7 @@
 #include <string.h>
 #include "bbddmain.h"
 
+// Abrir la base de datos
 int abrir_base(BBDD *base, const char *nombre_archivo) {
     int rc = sqlite3_open(nombre_archivo, &(base->db));
     if (rc) {
@@ -9,7 +10,7 @@ int abrir_base(BBDD *base, const char *nombre_archivo) {
         return rc;
     }
     printf("Base de datos abierta correctamente.\n");
-
+    
     // Crear tabla de usuarios si no existe
     const char *sql_create = "CREATE TABLE IF NOT EXISTS usuarios ("
                              "id INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -26,11 +27,13 @@ int abrir_base(BBDD *base, const char *nombre_archivo) {
     return rc;
 }
 
+// Cerrar la base de datos
 void cerrar_base(BBDD *base) {
     sqlite3_close(base->db);
     printf("Base de datos cerrada.\n");
 }
 
+// Registrar un nuevo usuario
 int registrar_usuario(BBDD *base, const char *usuario, const char *contrasena) {
     const char *sql_insert = "INSERT INTO usuarios (usuario, contrasena) VALUES (?, ?);";
     sqlite3_stmt *stmt;
@@ -55,6 +58,7 @@ int registrar_usuario(BBDD *base, const char *usuario, const char *contrasena) {
     return rc == SQLITE_DONE ? SQLITE_OK : rc;
 }
 
+// Iniciar sesión
 int iniciar_sesion(BBDD *base, const char *usuario, const char *contrasena) {
     const char *sql_select = "SELECT id FROM usuarios WHERE usuario = ? AND contrasena = ?;";
     sqlite3_stmt *stmt;
@@ -69,7 +73,7 @@ int iniciar_sesion(BBDD *base, const char *usuario, const char *contrasena) {
     sqlite3_bind_text(stmt, 2, contrasena, -1, SQLITE_STATIC);
 
     rc = sqlite3_step(stmt);
-    int resultado = (rc == SQLITE_ROW);  // Hay resultado = inicio de sesión correcto
+    int resultado = (rc == SQLITE_ROW);  // Si hay un resultado, el inicio de sesión es correcto
 
     if (resultado) {
         printf("Inicio de sesión exitoso.\n");
@@ -81,14 +85,64 @@ int iniciar_sesion(BBDD *base, const char *usuario, const char *contrasena) {
     return resultado;
 }
 
+// Cambiar el nombre de usuario
+int cambiar_nombre_usuario(BBDD *base, const char *usuario_actual, const char *nuevo_nombre) {
+    sqlite3_stmt *stmt;
+    const char *sql = "UPDATE usuarios SET usuario = ? WHERE usuario = ?;";
+    int rc = sqlite3_prepare_v2(base->db, sql, -1, &stmt, NULL);
+
+    if (rc != SQLITE_OK) {
+        printf("Error al preparar la consulta: %s\n", sqlite3_errmsg(base->db));
+        return rc;
+    }
+
+    sqlite3_bind_text(stmt, 1, nuevo_nombre, -1, SQLITE_STATIC);
+    sqlite3_bind_text(stmt, 2, usuario_actual, -1, SQLITE_STATIC);
+
+    rc = sqlite3_step(stmt);
+    if (rc != SQLITE_DONE) {
+        printf("Error al cambiar el nombre de usuario: %s\n", sqlite3_errmsg(base->db));
+    } else {
+        printf("Nombre de usuario cambiado con éxito.\n");
+    }
+
+    sqlite3_finalize(stmt);
+    return rc == SQLITE_DONE ? SQLITE_OK : rc;
+}
+
+// Cambiar la contraseña del usuario
+int cambiar_contrasena(BBDD *base, const char *usuario, const char *nueva_contrasena) {
+    sqlite3_stmt *stmt;
+    const char *sql = "UPDATE usuarios SET contrasena = ? WHERE usuario = ?;";
+    int rc = sqlite3_prepare_v2(base->db, sql, -1, &stmt, NULL);
+
+    if (rc != SQLITE_OK) {
+        printf("Error al preparar la consulta: %s\n", sqlite3_errmsg(base->db));
+        return rc;
+    }
+
+    sqlite3_bind_text(stmt, 1, nueva_contrasena, -1, SQLITE_STATIC);
+    sqlite3_bind_text(stmt, 2, usuario, -1, SQLITE_STATIC);
+
+    rc = sqlite3_step(stmt);
+    if (rc != SQLITE_DONE) {
+        printf("Error al cambiar la contraseña: %s\n", sqlite3_errmsg(base->db));
+    } else {
+        printf("Contraseña cambiada con éxito.\n");
+    }
+
+    sqlite3_finalize(stmt);
+    return rc == SQLITE_DONE ? SQLITE_OK : rc;
+}
+
 int existe_usuario(BBDD *bd, const char *nombre_usuario) {
     sqlite3_stmt *stmt;
-    const char *sql = "SELECT COUNT(*) FROM usuarios WHERE usuario = ?;";  // asumiendo que tu tabla se llama 'usuarios'
+    const char *sql = "SELECT COUNT(*) FROM usuarios WHERE usuario = ?;";
     int existe = 0;
 
     if (sqlite3_prepare_v2(bd->db, sql, -1, &stmt, NULL) != SQLITE_OK) {
         printf("Error al preparar consulta: %s\n", sqlite3_errmsg(bd->db));
-        return 0;  // si falla, asumimos que no existe (podrías manejarlo diferente)
+        return 0;
     }
 
     sqlite3_bind_text(stmt, 1, nombre_usuario, -1, SQLITE_STATIC);

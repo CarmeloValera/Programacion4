@@ -3,6 +3,7 @@
 #include "bbdd/sqlite3.h"
 #include "bbdd/bbddmain.h"
 BBDD baseDatos;
+Usuario user;
 int main() {
     int opcion;
     if (abrir_base(&baseDatos, "BaseDeDatos.db") != SQLITE_OK) {
@@ -21,7 +22,7 @@ int main() {
 
         switch (opcion) {
             case 1:
-                iniciarSesion();
+                user = iniciarSesion(&baseDatos);
                 break;
             case 2:
                 registrar();
@@ -30,7 +31,7 @@ int main() {
                 jugar();
                 break;
             case 4:
-                opcionesUsuario();
+                opcionesUsuario(user);
                 break;
             case 5:
                 printf("Saliendo del programa...\n");

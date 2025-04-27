@@ -1,9 +1,13 @@
 #ifndef MENU_H
 #define MENU_H
+#include <stdbool.h> 
+#include "usuarios.h"
+#include "bbdd/bbddmain.h"
 
-void iniciarSesion();
+Usuario iniciarSesion(BBDD *baseDatos);
 void registrar();
 void jugar();
-void opcionesUsuario();
+void opcionesUsuario(Usuario);
+Usuario obetenerUsuario();
 
 #endif

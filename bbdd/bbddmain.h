@@ -14,5 +14,7 @@ void cerrar_base(BBDD *base);
 int registrar_usuario(BBDD *base, const char *usuario, const char *contrasena);
 int iniciar_sesion(BBDD *base, const char *usuario, const char *contrasena);
 int existe_usuario(BBDD *bd, const char *nombre_usuario);
+int cambiar_nombre_usuario(BBDD *base, const char *usuario_actual, const char *nuevo_nombre);
+int cambiar_contrasena(BBDD *base, const char *usuario, const char *nueva_contrasena);
 
 #endif 
