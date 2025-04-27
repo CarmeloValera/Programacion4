@@ -3,6 +3,7 @@
 #include <time.h>
 #include <string.h>
 #include "codigo.h"
+#include "util.h"  // 🔥 Añadido para poder guardar el historial
 
 void generarCodigo(int codigo[4]) {
     for (int i = 0; i < 4; i++) {
@@ -15,6 +16,8 @@ void jugarCodigo() {
     int intento[4];
     char entrada[10];
     int intentosMax = 8;
+    int exito = 0;           // 🔥 Nuevo: Para saber si el jugador ganó
+    int intentosUsados = 0;   // 🔥 Nuevo: Para guardar los intentos usados
 
     srand(time(NULL));
     generarCodigo(codigoSecreto);
@@ -41,7 +44,6 @@ void jugarCodigo() {
         int usadosCodigo[4] = {0};
         int usadosIntento[4] = {0};
 
-
         for (int i = 0; i < 4; i++) {
             if (intento[i] == codigoSecreto[i]) {
                 printf("X ");
@@ -64,6 +66,9 @@ void jugarCodigo() {
 
         if (aciertos == 4) {
             printf("\n🎉 ¡Felicidades! Has adivinado el codigo correctamente.\n");
+            exito = 1;
+            intentosUsados = intentoNum;
+            guardarHistorialCodigo(codigoSecreto, exito, intentosUsados);  // 🔥 Guardar victoria
             return;
         }
     }
@@ -74,4 +79,8 @@ void jugarCodigo() {
         printf("%d", codigoSecreto[i]);
     }
     printf("\n");
+
+    exito = 0;
+    intentosUsados = intentosMax;
+    guardarHistorialCodigo(codigoSecreto, exito, intentosUsados);  // 🔥 Guardar derrota
 }

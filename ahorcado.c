@@ -63,4 +63,5 @@ void jugarAhorcado() {
     } else {
         printf("\nHas perdido. La palabra era: %s\n", palabraSecreta);
     }
+    guardarHistorialAhorcado(palabraSecreta, aciertos, intentos);
 }

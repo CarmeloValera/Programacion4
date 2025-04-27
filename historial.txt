@@ -1,0 +1,8 @@
+=== Partida de Ahorcado ===
+Fecha: 27/04/2025 09:43
+Palabra secreta: bicicleta
+Aciertos: 9
+Intentos restantes: 5
+Resultado: Victoria
+---------------------------
+
