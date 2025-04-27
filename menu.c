@@ -62,7 +62,6 @@ void jugar() {
     } while (opcion != 4);
 }
 
-// Submenú de opciones del usuario
 void opcionesUsuario() {
     int opcion;
     do {
