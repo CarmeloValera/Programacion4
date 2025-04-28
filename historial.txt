@@ -50,3 +50,12 @@ Intentos usados: 3
 Resultado: Victoria
 ---------------------------
 
+=== Partida de Ahorcado ===
+Usuario: 1234
+Fecha: 27/04/2025 20:41
+Palabra secreta: perro
+Aciertos: 5
+Intentos restantes: 4
+Resultado: Victoria
+---------------------------
+
