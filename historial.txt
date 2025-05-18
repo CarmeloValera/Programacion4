@@ -59,3 +59,11 @@ Intentos restantes: 4
 Resultado: Victoria
 ---------------------------
 
+=== Partida de Adivina el número ===
+Usuario: hugo
+Fecha: 18/05/2025 19:31
+Número secreto: 11
+Intentos necesitados: 8
+Resultado: Victoria
+---------------------------
+

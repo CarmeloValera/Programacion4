@@ -5,6 +5,7 @@
 #include "util.h"
 #include "usuarios.h"    
 #include "bbdd/bbddmain.h" 
+#include "adivina.h"
 #include <string.h>
 
 extern BBDD baseDatos; 
@@ -54,7 +55,7 @@ void jugar(Usuario user) {
     int opcion;
     do {
         mostrarMenuJugar();
-        opcion = leer_entero("Elige una opción: ", 1, 4);
+        opcion = leer_entero("Elige una opción: ", 1, 5);
 
 
         switch (opcion) {
@@ -66,18 +67,22 @@ void jugar(Usuario user) {
                 printf("secuencia numerica...\n");
                 jugarCodigo(user);
                 break;
-            case 3:
+            case 3: 
+                printf("generando numero aleatorio...\n");
+                jugarAdivinaNumero(user.nombre); 
+                break;
+            case 4:
                 printf("historial del usuario...");
                 mostrarHistorial(user);
                 break;
-            case 4:
+            case 5:
                 printf("Saliendo al menu principal...\n");
                 break;
             default:
                 printf("Opcion invalida. Intente de nuevo.\n");
                 break;
         }
-    } while (opcion != 4);
+    } while (opcion != 5);
 }
 
 void opcionesUsuario(Usuario user) {
@@ -169,10 +174,11 @@ void mostrarMenuJugar(void) {
     const char *ops[] = {
       "Jugar al ahorcado",
       "Jugar a la secuencia numerica",
+      "Adivinar numero",
       "Historial del usuario",
       "Volver al menu principal"
     };
-    mostrarMenu("Menu Jugar", ops, 4);
+    mostrarMenu("Menu Jugar", ops, 5);
 }
 
 void mostrarMenuUsuario(void){

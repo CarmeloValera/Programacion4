@@ -228,3 +228,27 @@ void mostrarMenu(const char *titulo, const char *ops[], int n){
         printf("%d) %s\n", i+1, ops[i]);
 }
 
+void guardarHistorialNumero(const char *usuario, int secreto, int intentos) {
+    if (usuario == NULL || strlen(usuario) == 0) return;
+
+    FILE *hist = fopen("historial.txt", "a");
+    if (!hist) {
+        perror("Error al abrir historial.txt");
+        return;
+    }
+
+    time_t ahora = time(NULL);
+    struct tm *t = localtime(&ahora);
+
+    fprintf(hist, "=== Partida de Adivina el número ===\n");
+    fprintf(hist, "Usuario: %s\n", usuario);
+    fprintf(hist, "Fecha: %02d/%02d/%04d %02d:%02d\n",
+            t->tm_mday, t->tm_mon + 1,
+            t->tm_year + 1900, t->tm_hour, t->tm_min);
+    fprintf(hist, "Número secreto: %d\n", secreto);
+    fprintf(hist, "Intentos necesitados: %d\n", intentos);
+    fprintf(hist, "Resultado: Victoria\n");
+    fprintf(hist, "---------------------------\n\n");
+
+    fclose(hist);
+}

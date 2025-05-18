@@ -9,5 +9,6 @@ void mostrarHistorial(Usuario user);
 int leer_entero(const char *prompt, int min, int max);
 void leer_cadena(const char *prompt, char *buf, size_t len);
 void mostrarMenu(const char *titulo, const char *ops[], int n);
+void guardarHistorialNumero(const char *usuario, int secreto, int intentos);
 
 #endif
