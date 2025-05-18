@@ -2,6 +2,9 @@
 #include "menu.h"
 #include "bbdd/sqlite3.h"
 #include "bbdd/bbddmain.h"
+#include "menu.h"
+#include "util.h"
+
 BBDD baseDatos;
 Usuario user;
 int main() {
@@ -11,31 +14,23 @@ int main() {
     }
 
     do {
-        printf("\n=== Menu Principal ===\n");
-        printf("1. Iniciar sesion\n");
-        printf("2. Registrar\n");
-        printf("3. Jugar\n");
-        printf("4. Opciones del usuario\n");
-        printf("5. Salir\n");
-        printf("Seleccione una opcion: ");
-        scanf("%d", &opcion);
+        mostrarMenuPrincipal();
+        opcion = leer_entero("Elige una opción: ", 1, 5);
 
-        switch (opcion) {
-            case 1:
-                user = iniciarSesion(&baseDatos);
-                break;
-            case 2:
-                registrar();
-                break;
-            case 3:
-                jugar(user);
-                break;
-            case 4:
-                opcionesUsuario(user);
-                break;
-            case 5:
-                printf("Saliendo del programa...\n");
-                break;
+
+        switch ((OpcionMenu)opcion) {
+
+            case OP_INICIAR_SESION: user = iniciarSesion(&baseDatos); 
+            break;
+            case OP_REGISTRAR:      registrar();                   
+            break;
+            case OP_JUGAR:          jugar(user);                   
+            break;
+            case OP_OPCIONES_USUARIO: opcionesUsuario(user);       
+            break;
+            case OP_SALIR:          printf("Saliendo…\n");         
+            break;
+
             default:
                 printf("Opción invalida. Intente de nuevo.\n");
                 break;

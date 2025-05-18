@@ -53,13 +53,9 @@ void registrar() {
 void jugar(Usuario user) {
     int opcion;
     do {
-        printf("\n=== Menu Jugar ===\n");
-        printf("1. Jugar al ahorcado\n");
-        printf("2. Jugar a la secuencia numerica\n");
-        printf("3. Historial del usuario\n");
-        printf("4. Salir al menu principal\n");
-        printf("Seleccione una opcion: ");
-        scanf("%d", &opcion);
+        mostrarMenuJugar();
+        opcion = leer_entero("Elige una opción: ", 1, 4);
+
 
         switch (opcion) {
             case 1:
@@ -93,19 +89,14 @@ void opcionesUsuario(Usuario user) {
 
     int opcion;
     do {
-        printf("\n=== Opciones del Usuario ===\n");
-        printf("1. Cambiar nombre de usuario\n");
-        printf("2. Cambiar contrasena\n");
-        printf("3. Volver\n");
-        printf("Seleccione una opcion: ");
-        scanf("%d", &opcion);
-
-        switch (opcion) {
+        mostrarMenuUsuario();
+        opcion = leer_entero("Elige una opción: ", 1, 5);
+        switch ((OpcionMenu)opcion) {
             case 1:
                 {
                     char nuevo_nombre[50];  // Declarar dentro de un bloque para evitar el error
                     printf("Ingrese el nuevo nombre de usuario: ");
-                    scanf("%s", nuevo_nombre);
+                    leer_cadena("Introduce nombre: ", nuevo_nombre, sizeof nuevo_nombre);
                     
                     int intentos = 3;
                     int exito = 0;
@@ -130,7 +121,7 @@ void opcionesUsuario(Usuario user) {
                 {
                     char nueva_contrasena[MAX_USUARIO];  // Declarar dentro de un bloque para evitar el error
                     printf("Ingrese la nueva contraseña: ");
-                    scanf("%s", nueva_contrasena);
+                    leer_cadena("Introduce nombre: ", nueva_contrasena , sizeof nueva_contrasena);
                     
                     int intentos = 3;
                     int exito = 0;
@@ -163,4 +154,34 @@ void opcionesUsuario(Usuario user) {
 
     // Cerramos la base de datos después de salir del bucle
 }
+void mostrarMenuPrincipal(void) {
+    const char *ops[] = {
+        "Iniciar sesión",
+        "Registrar",
+        "Jugar",
+        "Opciones del usuario",
+        "Salir"
+    };
+    mostrarMenu("Menu Principal", ops, 5);
+}
+
+void mostrarMenuJugar(void) {
+    const char *ops[] = {
+      "Jugar al ahorcado",
+      "Jugar a la secuencia numerica",
+      "Historial del usuario",
+      "Volver al menu principal"
+    };
+    mostrarMenu("Menu Jugar", ops, 4);
+}
+
+void mostrarMenuUsuario(void){
+    const char *ops[] = {
+        "Cambiar nombre de usuario",
+        "Cambiar contrasena",
+        "Volver al menu principal"
+      };
+      mostrarMenu("Menu Usuario", ops, 3);
+  }
+
 

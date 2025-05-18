@@ -6,15 +6,15 @@
 #include "util.h" 
 #include "usuarios.h"
 
-void generarCodigo(int codigo[4]) {
-    for (int i = 0; i < 4; i++) {
+void generarCodigo(int codigo[CODE_LENGTH]) {
+    for (int i = 0; i < CODE_LENGTH; i++) {
         codigo[i] = rand() % 10;
     }
 }
 
 void jugarCodigo(Usuario user) {
-    int codigoSecreto[4];
-    int intento[4];
+    int codigoSecreto[CODE_LENGTH];
+    int intento[CODE_LENGTH];
     char entrada[10];
     int intentosMax = 8;
     int exito = 0;
@@ -29,26 +29,26 @@ void jugarCodigo(Usuario user) {
 
     for (int intentoNum = 1; intentoNum <= intentosMax; intentoNum++) {
         printf("\nIntento %d: ", intentoNum);
-        scanf("%s", entrada);
+        leer_cadena("Introduce nombre: ", entrada, sizeof entrada);
 
-        if (strlen(entrada) != 4) {
+        if (strlen(entrada) != CODE_LENGTH) {
             printf("Debes ingresar exactamente 4 dígitos.\n");
             intentoNum--;
             continue;
         }
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < CODE_LENGTH; i++) {
             intento[i] = entrada[i] - '0';
         }
 
         int aciertos = 0;
-        int usadosCodigo[4] = {0};
-        int usadosIntento[4] = {0};
+        int usadosCodigo[CODE_LENGTH] = {0};
+        int usadosIntento[CODE_LENGTH] = {0};
 
         char resultado[5] = "";  
 
         // Primero, buscar aciertos exactos (X)
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < CODE_LENGTH; i++) {
             if (intento[i] == codigoSecreto[i]) {
                 resultado[i] = 'X';
                 usadosCodigo[i] = 1;
@@ -60,9 +60,9 @@ void jugarCodigo(Usuario user) {
         }
 
         // Después, buscar aciertos en posición incorrecta (O)
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < CODE_LENGTH; i++) {
             if (resultado[i] == '-') { 
-                for (int j = 0; j < 4; j++) {
+                for (int j = 0; j < CODE_LENGTH; j++) {
                     if (!usadosCodigo[j] && intento[i] == codigoSecreto[j]) {
                         resultado[i] = 'O';
                         usadosCodigo[j] = 1;
@@ -73,12 +73,12 @@ void jugarCodigo(Usuario user) {
         }
 
         
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < CODE_LENGTH; i++) {
             printf("%c ", resultado[i]);
         }
         printf("\n");
 
-        if (aciertos == 4) {
+        if (aciertos == CODE_LENGTH) {
             printf("\n🎉 ¡Felicidades! Has adivinado el código correctamente.\n");
             exito = 1;
             intentosUsados = intentoNum;
@@ -89,7 +89,7 @@ void jugarCodigo(Usuario user) {
 
     printf("\n😢 Lo siento, has agotado tus intentos.\n");
     printf("El código secreto era: ");
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < CODE_LENGTH; i++) {
         printf("%d", codigoSecreto[i]);
     }
     printf("\n");

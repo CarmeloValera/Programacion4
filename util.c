@@ -4,6 +4,7 @@
 #include <time.h>
 #include "util.h"
 #include "usuarios.h"
+#include "menu.h"
 
 #define MAX_LINEA 1024
 #define MAX_PALABRAS 100
@@ -185,7 +186,8 @@ void mostrarHistorial(Usuario user) {
         printf("\n1. Ver siguiente partida\n");
         printf("2. Salir\n");
         printf("Seleccione una opción: ");
-        scanf("%d", &opcion);
+        opcion = leer_entero("Selecciona opción: ", 1, MAX_OPC);
+
 
         if (opcion == 1) {
             partidaActual++;
@@ -203,3 +205,26 @@ void mostrarHistorial(Usuario user) {
         free(lineas[i]);
     }
 }
+int leer_entero(const char *prompt, int min, int max){
+    char linea[128];
+    int valor;
+    while (1) {
+        printf("%s", prompt);
+        if (!fgets(linea, sizeof(linea), stdin)) exit(1);
+        if (sscanf(linea, "%d", &valor)==1 && valor>=min && valor<=max)
+            return valor;
+        printf("  Entrada inválida. Introduce un número entre %d y %d.\n", min, max);
+    }
+}
+void leer_cadena(const char *prompt, char *buf, size_t len){
+    printf("%s", prompt);
+    if (fgets(buf, len, stdin)) {
+        buf[strcspn(buf, "\n")] = '\0';
+    }
+}
+void mostrarMenu(const char *titulo, const char *ops[], int n){
+    printf("\n=== %s ===\n", titulo);
+    for (int i = 0; i < n; i++)
+        printf("%d) %s\n", i+1, ops[i]);
+}
+
